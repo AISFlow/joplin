@@ -4,7 +4,7 @@ on:
   push:
     paths:
       - 'Dockerfile'
-  workflow_dispatch:
+  workflow_dispatch: # 수동 트리거 활성화
 
 env:
   REGISTRY_GHCR: ghcr.io
@@ -102,11 +102,8 @@ jobs:
         id: cache
         with:
           path: |
-            var-cache-apt
-            var-lib-apt
-            npm-cache
-            go-build-cache
-            go-mod-cache
+            yarn-cache
+            yarn-berry-cache
           key: buildkit-${{ runner.os }}-${{ matrix.arch }}
 
       # Step 7: Inject build cache
@@ -116,7 +113,7 @@ jobs:
           cache-map: |
             {
               "yarn-cache": "/build/.yarn/cache",
-              "yarn-berry-cache": '/build/.yarn/berry/cache'
+              "yarn-berry-cache": "/build/.yarn/berry/cache"
             }
           skip-extraction: ${{ steps.cache.outputs.cache-hit }}
 
