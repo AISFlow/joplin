@@ -31,6 +31,7 @@ ENV UID=1001
 ENV GID=1001
 ENV USER=joplin
 COPY --link --chown=${UID}:${GID} --from=builder /build/packages /home/${USER}/packages
+COPY --link --chown=${UID}:${GID} --from=builder /usr/bin/tini /usr/bin/tini
 RUN set -eux; \
     groupadd --gid ${GID} ${USER} || true; \
     useradd --uid ${UID} --gid ${GID} --home-dir /home/${USER} --shell /bin/bash --create-home ${USER}; \
