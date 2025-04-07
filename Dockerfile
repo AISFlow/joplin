@@ -41,7 +41,7 @@ USER ${USER}
 ENV NODE_ENV=production
 ENV RUNNING_IN_DOCKER=1
 
-EXPOSE ${APP_PORT}
+EXPOSE 22300/tcp
 
 WORKDIR /home/${USER}/packages/server
 
